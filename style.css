@@ -1,0 +1,88 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    color: white;
+    font-family: "Playwrite GB S", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: italic;
+}
+
+body {
+    background: rgb(82, 4, 101);
+    background: linear-gradient(35deg, rgba(82, 4, 101, 1) 0%, rgba(42, 5, 51, 1) 100%, rgba(255, 255, 255, 1) 255%);
+}
+
+h1 {
+    animation: blink 3s infinite;
+}
+
+p {
+    margin-bottom: 25px;
+}
+
+#main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    height: 700px;
+}
+
+#sudoku-box {
+    height: 400px;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 1px white;
+    margin: 35px;
+}
+
+.buttons {
+    width: 500px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 25px;
+}
+
+#solve,
+#reset {
+    cursor: pointer;
+    padding: 5px 20px;
+    border: none;
+    text-shadow: 0 0 5px white;
+}
+
+.buttons button {
+    background-color: transparent;
+    font-size: medium;
+    transition: transform 200ms ease-in-out;
+}
+
+.buttons button:hover {
+    transform: translateY(-5px);
+}
+
+@keyframes blink {
+    0% {
+        text-shadow: 0 0 1px white;
+    }
+
+    25% {
+        text-shadow: 0 0 3px white;
+    }
+
+    50% {
+        text-shadow: 0 0 5px white;
+    }
+
+    75% {
+        text-shadow: 0 0 3px white;
+    }
+
+    100% {
+        text-shadow: 0 0 1px white;
+    }
+}
