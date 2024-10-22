@@ -11,7 +11,7 @@
 
 body {
     background: rgb(82, 4, 101);
-    background: linear-gradient(35deg, rgba(82, 4, 101, 1) 0%, rgba(42, 5, 51, 1) 100%, rgba(255, 255, 255, 1) 255%);
+    background: linear-gradient(35deg, rgb(26, 3, 32) 0%, rgba(42, 5, 51, 1) 100%, rgba(255, 255, 255, 1) 255%);
 }
 
 h1 {
@@ -35,8 +35,27 @@ p {
     height: 400px;
     width: 400px;
     border-radius: 10px;
-    box-shadow: 0 0 10px 1px white;
+    box-shadow: 0 0 13px 1px white;
     margin: 35px;
+    overflow: hidden;
+}
+
+/* Rmoving Arrows on number input */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input[type=number] {
+    height: 40px;
+    width: 40px;
+    background: none;
+    border: 1px solid white;
+    text-align: center;
 }
 
 .buttons {
