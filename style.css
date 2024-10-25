@@ -27,7 +27,7 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 20px;
+    /* margin: 0px 20px; */
     height: 700px;
 }
 
