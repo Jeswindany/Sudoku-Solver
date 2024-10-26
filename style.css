@@ -46,6 +46,7 @@ input[type=number] {
     width: 40px;
     background: none;
     border: none; /* Remove the border */
+    border-radius: 0px;
     box-shadow: 0 0 0 0.13px white; /* Mimic a thin border using box-shadow */
     text-align: center;
     -moz-appearance: textfield;
