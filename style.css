@@ -50,6 +50,8 @@ input[type=number] {
     box-shadow: 0 0 0 0.13px white; /* Mimic a thin border using box-shadow */
     text-align: center;
     -moz-appearance: textfield;
+    -webkit-appearance: none;
+    appearance: none;
     appearance: textfield;
 }
 
