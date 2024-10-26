@@ -10,7 +10,6 @@
 }
 
 body {
-    background: rgb(82, 4, 101);
     background: linear-gradient(35deg, rgb(26, 3, 32) 0%, rgba(42, 5, 51, 1) 100%, rgba(255, 255, 255, 1) 255%);
 }
 
@@ -18,17 +17,12 @@ h1 {
     animation: blink 3s infinite;
 }
 
-p {
-    margin-bottom: 25px;
-}
-
 #main-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    /* margin: 0px 20px; */
-    height: 700px;
+    height: 750px;
 }
 
 #sudoku-box {
@@ -40,7 +34,7 @@ p {
     overflow: hidden;
 }
 
-/* Rmoving Arrows on number input */
+/* Removing Arrows on number input */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -63,11 +57,9 @@ input[type=number]:nth-of-type(3n) {
 }
 
 .buttons {
-    width: 500px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin-top: 25px;
 }
 
 #solve,
@@ -79,6 +71,7 @@ input[type=number]:nth-of-type(3n) {
 }
 
 .buttons button {
+    margin: 0px 30px;
     background-color: transparent;
     font-size: medium;
     transition: transform 200ms ease-in-out;
@@ -86,6 +79,13 @@ input[type=number]:nth-of-type(3n) {
 
 .buttons button:hover {
     transform: translateY(-5px);
+}
+
+#wrongInputMsg {
+    color: red; 
+    display: none; 
+    font-size: 13px;
+    text-align: center;
 }
 
 @keyframes blink {
@@ -107,5 +107,17 @@ input[type=number]:nth-of-type(3n) {
 
     100% {
         text-shadow: 0 0 1px white;
+    }
+}
+
+@media (max-width: 450px) {
+    #sudoku-box {
+        height: 315px;
+        width: 315px;
+    }
+
+    input[type=number] {
+        height: 35px;
+        width: 35px;
     }
 }

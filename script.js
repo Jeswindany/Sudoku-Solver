@@ -20,12 +20,15 @@ for (let i = 1; i <= 73; i += 9) {
 
 // Reset Event Handling
 
-document.getElementById('reset').addEventListener('click', reset);
+const resetBtn = document.getElementById('reset');
+resetBtn.addEventListener('click', reset);
 
 function reset() {
     for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) {
             inputBoxes[i][j].value = "";
+            inputBoxes[i][j].style.color = "white";
+            inputBoxes[i][j].disabled = false;
         }
     }
     wrongInputMsg.style.display = "none";
@@ -35,10 +38,56 @@ function reset() {
 
 document.getElementById('solve').addEventListener('click', solve);
 
-function solve() {
+async function solve() {
     if (!hasValidInputs()) {
         return;
     }
+    
+    resetBtn.disabled = true;
+
+    let solutionFound = await solveSudoku(0, 0);
+    if (!solutionFound) {
+        wrongInputMsg.textContent = "No Solution Found!";
+        wrongInputMsg.style.display = "block";
+        setTimeout(reset, 5000);
+    }
+
+    resetBtn.disabled = false;
+}
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function solveSudoku(row, col) {
+    if (row == 8 && col == 9) {
+        return true;
+    }
+
+    if (col == 9) {
+        row++;
+        col = 0;
+    }
+
+    if (hasValue(row, col)) {
+        return await solveSudoku(row, col + 1);
+    }
+
+    for (let num = 1; num <= 9; num++) {
+        if (isValidPosition(num, row, col)) {
+            inputBoxes[row][col].value = num;
+            inputBoxes[row][col].disabled = true;
+
+            await delay(2);
+
+            if (await solveSudoku(row, col + 1)) {
+                return true;
+            }
+        }
+        inputBoxes[row][col].value = "";
+    }
+
+    return false;
 }
 
 const wrongInputMsg = document.getElementById("wrongInputMsg");
@@ -50,28 +99,31 @@ function hasValidInputs() {
 
             if (val == "") {
                 continue;
-            } else if (parseInt(val) < 1 || parseInt(val) > 9) {
-                wrongInputMsg.textContent = "One of the entered values is not in the range [1 - 9]!";
+            }
+
+            if (!/^[1-9]$/.test(val)) {
+                wrongInputMsg.textContent = "Invalid input detected! Please enter numbers between 1 and 9 only.";
                 wrongInputMsg.style.display = "block";
                 return false;
-            } else if (!isValidPosition(i, j)) {
+            } else if (!isValidPosition(parseInt(val), i, j)) {
                 wrongInputMsg.textContent = "One of the entered values appears twice in the same row, column, or sub-box.";
                 wrongInputMsg.style.display = "block";
                 return false;
             }
+
+            inputBoxes[i][j].style.color = "#907294";
+            inputBoxes[i][j].disabled = true;
         }
     }
     wrongInputMsg.style.display = "none";
     return true;
 }
 
-function isValidPosition(x, y) {
-    let val = inputBoxes[x][y].value;
-
+function isValidPosition(val, x, y) {
     for (let i = 0; i < 9; i++) {
-        if (i != x && inputBoxes[i][y].value === val) {
+        if (i != x && parseInt(inputBoxes[i][y].value) === val) {
             return false;
-        } else if (i != y && inputBoxes[x][i].value === val) {
+        } else if (i != y && parseInt(inputBoxes[x][i].value) === val) {
             return false;
         }
     }
@@ -85,10 +137,18 @@ function isValidPosition(x, y) {
         for (let j = 0; j < 3; j++) {
             let subRow = startRow + i;
             let subCol = startCol + j;
-            if ((subRow !== x || subCol !== y) && inputBoxes[subRow][subCol].value === val) {
+            if ((subRow !== x || subCol !== y) && parseInt(inputBoxes[subRow][subCol].value) === val) {
                 return false;
             }
         }
     }
     return true;
+}
+
+function hasValue(i, j) {
+    if (inputBoxes[i][j].value !== "") {
+        return true;
+    } else {
+        return false;
+    }
 }
