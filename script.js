@@ -38,14 +38,14 @@ function reset() {
 
 document.getElementById('solve').addEventListener('click', solve);
 
-async function solve() {
+function solve() {
     if (!hasValidInputs()) {
         return;
     }
     
     resetBtn.disabled = true;
 
-    let solutionFound = await solveSudoku(0, 0);
+    let solutionFound = solveSudoku(0, 0);
     if (!solutionFound) {
         wrongInputMsg.textContent = "No Solution Found!";
         wrongInputMsg.style.display = "block";
@@ -55,11 +55,7 @@ async function solve() {
     resetBtn.disabled = false;
 }
 
-function delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function solveSudoku(row, col) {
+function solveSudoku(row, col) {
     if (row == 8 && col == 9) {
         return true;
     }
@@ -70,7 +66,7 @@ async function solveSudoku(row, col) {
     }
 
     if (hasValue(row, col)) {
-        return await solveSudoku(row, col + 1);
+        return solveSudoku(row, col + 1);
     }
 
     for (let num = 1; num <= 9; num++) {
@@ -78,9 +74,7 @@ async function solveSudoku(row, col) {
             inputBoxes[row][col].value = num;
             inputBoxes[row][col].disabled = true;
 
-            await delay(2);
-
-            if (await solveSudoku(row, col + 1)) {
+            if (solveSudoku(row, col + 1)) {
                 return true;
             }
         }
