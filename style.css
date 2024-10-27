@@ -45,10 +45,8 @@ input[type=number] {
     height: 40px;
     width: 40px;
     background: none;
-    border: none; /* Remove the border */
+    border: 1px solid rgba(255,255,255, 0.13);
     border-radius: 0px;
-    box-shadow: 0 0 0 0.13px white; /* Mimic a thin border using box-shadow */
-    -webkit-box-shadow: 0 0 0 0.13px white;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
     text-align: center;
